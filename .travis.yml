@@ -1,0 +1,14 @@
+language: bash
+
+services: docker
+ 
+before_script:
+  - image="richardregeer/google-drive-sync:latest"
+
+script:
+  - docker build -t "$image" .
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker push "$image"
+
+after_script:
+- docker images
