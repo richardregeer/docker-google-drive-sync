@@ -6,7 +6,7 @@ This docker image uses rclone to continuously sync your google drive data to a s
 docker run --rm \
 --log-opt max-size=10m \
 -v <host/path/to/offline/folder>:/var/target \
--v <host/path/to/config/folder>/rclone.conf:/root/.config/rclone/rclone.conf \
+-v <host/path/to/config/folder>:/root/.config/rclone \
 -d \
 richardregeer/google-drive-sync
 ```
@@ -37,12 +37,12 @@ docker run --rm \
 --log-opt max-size=10m \
 -e DRIVE_SYNC_FOLDER=/test \
 -e TARGET_FOLDER=/var/other/target \
--e REPEAT=5 \
+-e REPEAT=120 \
 -e DRIVE_NAME=drive-example \
 -e SYNC_OPTIONS=-L \
 -e BI_DIRECTIONAL_SYNC=TRUE \
 -v <host/path/to/offline/folder>:/var/target \
--v <host/path/to/config/folder>/rclone.conf:/root/.config/rclone/rclone.conf \
+-v <host/path/to/config/folder>:/root/.config/rclone \
 -d \
 richardregeer/google-drive-sync
 ```
