@@ -1,4 +1,6 @@
 # docker-google-drive-sync
+[![Build Status](https://travis-ci.org/richardregeer/docker-google-drive-sync.svg?branch=master)](https://travis-ci.org/richardregeer/docker-google-drive-sync)
+
 This docker image uses rclone to continuously sync your google drive data to a specific directory. It's also possible to sync changes back to google drive.
 
 ## Howto use the container
