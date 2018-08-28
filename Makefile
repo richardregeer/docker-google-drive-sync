@@ -74,7 +74,7 @@ publish: ## Pubish docker image to docker hub only available on ci environment.
 ifneq ($(ENV),ci)
 	$(error Required ENV='ci')
 endif
-	docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+	docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
 	docker push ${DOCKER_IMAGE}:latest
 
 .PHONY: lint
