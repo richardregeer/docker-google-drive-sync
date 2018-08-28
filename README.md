@@ -30,14 +30,14 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
   "googleDriveName": "google-drive",
   "syncToLocalFolder": "/var/target",
   "syncOptions": "",
-  "syncInterval": 60
+  "syncInterval": 60000
 }
 ```
 - googleDriveSyncFromFolder: Default '/'. The folder within google drive to sync.
 - googleDriveName: Default google-drive. The name used in rclone.
 - syncToLocalFolder: Default /var/target. The folder where the google-drive files are synced in the container. Make sure this folder is a volume that is shared with the host.
 - syncOptions: Default none. Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
-- syncInterval: Default 60s. The amount of time in seconds between syncs.
+- syncInterval: Default 60000. The amount of time in mili seconds between syncs.
 
 ```bash
 # Use -v to override the default config.json configuration.

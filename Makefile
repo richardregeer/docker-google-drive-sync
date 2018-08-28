@@ -64,7 +64,10 @@ endif
 
 .PHONY: build
 build: ## Build the google drive sync image.
-	docker build -t ${DOCKER_IMAGE}:${ENV} .
+	docker build \
+		-t ${DOCKER_IMAGE}:development \
+		-t ${DOCKER_IMAGE}:ci \
+		-t ${DOCKER_IMAGE}:production .
 ifeq ($(ENV),ci)
 	docker build -t ${DOCKER_IMAGE}:latest .
 endif

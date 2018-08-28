@@ -3,5 +3,5 @@
   "googleDriveName": "google-drive",
   "syncToLocalFolder": "/var/target",
   "syncOptions": "",
-  "syncInterval": 60
+  "syncInterval": 60000
 }
