@@ -9,9 +9,9 @@ before_script:
   - make install ENV=ci
 
 script:
+  - make lint DOCKER=false
   - make build ENV=ci
-  - make lint ENV=ci
-  - make publish
+  - make publish ENV=ci
 
 after_script:
   - docker images

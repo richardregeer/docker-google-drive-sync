@@ -22,7 +22,7 @@ START_COMMAND := docker run --rm -it --init --net=${DOCKER_NETWORK} \
 		-v ${PROJECT_ROOT}/etc/rclone.dev.conf:/root/.config/rclone/rclone.conf \
 		-v ${PROJECT_ROOT}/sync-root:/var/target \
 		-w ${PROJECT_CONTAINER_ROOT} \
-		${DOCKER_IMAGE}:development
+		${DOCKER_IMAGE}:${ENV}
 else
 START_COMMAND :=
 endif
@@ -64,9 +64,7 @@ endif
 
 .PHONY: build
 build: ## Build the google drive sync image.
-ifeq ($(ENV),development)
-	docker build -t ${DOCKER_IMAGE}:development .
-endif
+	docker build -t ${DOCKER_IMAGE}:${ENV} .
 ifeq ($(ENV),ci)
 	docker build -t ${DOCKER_IMAGE}:latest .
 endif
