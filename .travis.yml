@@ -3,11 +3,10 @@ language: bash
 services: docker
 
 before_script:
-  - make install ENV=ci
+  - make install ENV=ci DOCKER=false
 
 script:
   - make lint ENV=ci
-  - make build ENV=ci
   - make publish
 
 after_script:
