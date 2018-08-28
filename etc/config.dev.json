@@ -1,0 +1,7 @@
+{
+  "googleDriveSyncFromFolder": "/test",
+  "googleDriveName": "google-drive",
+  "syncToLocalFolder": "/var/target",
+  "syncOptions": "",
+  "syncInterval": 10
+}

@@ -1,0 +1,30 @@
+{
+  "name": "docker-google-drive-sync",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/richardregeer/docker-google-drive-sync.svg?branch=master)](https://travis-ci.org/richardregeer/docker-google-drive-sync)",
+  "main": "lib/sync.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardregeer/docker-google-drive-sync.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richardregeer/docker-google-drive-sync/issues"
+  },
+  "homepage": "https://github.com/richardregeer/docker-google-drive-sync#readme",
+  "dependencies": {
+    "shelljs": "^0.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

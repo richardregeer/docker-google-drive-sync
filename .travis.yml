@@ -1,14 +1,14 @@
 language: bash
 
 services: docker
- 
+
 before_script:
-  - image="richardregeer/google-drive-sync:latest"
+  - make install ENV=ci
 
 script:
-  - docker build -t "$image" .
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker push "$image"
+  - make lint ENV=ci
+  - make build ENV=ci
+  - make publish
 
 after_script:
-- docker images
+  - docker images

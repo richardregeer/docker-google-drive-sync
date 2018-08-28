@@ -8,7 +8,7 @@ This docker image uses rclone to continuously sync your google drive data to a s
 docker run --rm \
 --log-opt max-size=10m \
 -v <host/path/to/offline/folder>:/var/target \
--v <host/path/to/config/folder>:/root/.config/rclone \
+-v <host/path/to/rclone-config/folder>:/root/.config/rclone \
 -d \
 richardregeer/google-drive-sync
 ```
@@ -24,27 +24,43 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
 ```
 
 ## Configuration options
-Environment variables can be set:
-- `DRIVE_SYNC_FOLDER`: Default '/'
-- `TARGET_FOLDER`: Default /var/target
-- `REPEAT`: Default 60s
-- `DRIVE_NAME`: Default google-drive
-- `SYNC_OPTIONS` Default none
-- `BI_DIRECTIONAL_SYNC` Default FALSE
+```json
+{
+  "googleDriveSyncFromFolder": "/",
+  "googleDriveName": "google-drive",
+  "syncToLocalFolder": "/var/target",
+  "syncOptions": "",
+  "syncInterval": 60
+}
+```
+- googleDriveSyncFromFolder: Default '/'. The folder within google drive to sync.
+- googleDriveName: Default google-drive. The name used in rclone.
+- syncToLocalFolder: Default /var/target. The folder where the google-drive files are synced in the container. Make sure this folder is a volume that is shared with the host.
+- syncOptions: Default none. Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
+- syncInterval: Default 60s. The amount of time in seconds between syncs.
 
-For more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
 ```bash
-# Use -e to override the environment variable.
+# Use -v to override the default config.json configuration.
+# Make sure to target the correct directory in the container.
+
 docker run --rm \
 --log-opt max-size=10m \
--e DRIVE_SYNC_FOLDER=/test \
--e TARGET_FOLDER=/var/other/target \
--e REPEAT=120 \
--e DRIVE_NAME=drive-example \
--e SYNC_OPTIONS=-L \
--e BI_DIRECTIONAL_SYNC=TRUE \
+-v <host/path/to/google-sync-config.json>:/usr/local/bin/google-sync/etc/config.json
 -v <host/path/to/offline/folder>:/var/target \
--v <host/path/to/config/folder>:/root/.config/rclone \
+-v <host/path/to/config/folder/rclone.conf>:/root/.config/rclone/rclone.conf \
 -d \
 richardregeer/google-drive-sync
+```
+
+## Development
+For development please use ``make`` to see the available tasks
+```bash
+# Show all the available tasks
+make
+
+# Install and build the environment
+make install
+
+# Start in development mode
+make start
 ```
