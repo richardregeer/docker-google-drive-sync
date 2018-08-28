@@ -9,6 +9,7 @@ DEFAULT=\033[0m
 ENV := development
 DOCKER := true
 DOCKER_NETWORK := bridge
+VERSION := $(shell cat VERSION)
 OS := $(shell uname)
 PROJECT_ROOT := $(shell pwd)
 PROJECT_CONTAINER_ROOT := /usr/local/bin/google-sync
@@ -67,10 +68,9 @@ build: ## Build the google drive sync image.
 	docker build \
 		-t ${DOCKER_IMAGE}:development \
 		-t ${DOCKER_IMAGE}:ci \
-		-t ${DOCKER_IMAGE}:production .
-ifeq ($(ENV),ci)
-	docker build -t ${DOCKER_IMAGE}:latest .
-endif
+		-t ${DOCKER_IMAGE}:production \
+		-t ${DOCKER_IMAGE}:${VERSION} \
+		-t ${DOCKER_IMAGE}:latest .
 
 .PHONY: publish
 publish: ## Pubish docker image to docker hub only available on ci environment.
@@ -78,6 +78,7 @@ ifneq ($(ENV),ci)
 	$(error Required ENV='ci')
 endif
 	docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+	docker push ${DOCKER_IMAGE}:${VERSION}
 	docker push ${DOCKER_IMAGE}:latest
 
 .PHONY: lint

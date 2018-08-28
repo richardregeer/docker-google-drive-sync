@@ -10,7 +10,7 @@ before_script:
 
 script:
   - make lint DOCKER=false
-  - make build ENV=ci
+  - make build
   - make publish ENV=ci
 
 after_script:
