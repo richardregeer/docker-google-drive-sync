@@ -1,11 +1,15 @@
-language: bash
+language: node_js
+
+node_js:
+  "8"
 
 services: docker
 
 before_script:
-  - make install ENV=ci DOCKER=false
+  - make install ENV=ci
 
 script:
+  - make build ENV=ci
   - make lint ENV=ci
   - make publish
 

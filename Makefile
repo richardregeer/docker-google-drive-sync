@@ -52,9 +52,15 @@ endif
 
 .PHONY: install
 install: ## Install the docker google drive sync development environment. Possible environments ENV=development
+ifeq ($(ENV),development)
 	@echo -e '${CYAN}Install the docker google drive sync development environment${DEFAULT}'
 	make build
 	${START_COMMAND} npm install
+endif
+ifeq ($(ENV),ci)
+	@echo -e '${CYAN}Install the docker google drive sync ci environment${DEFAULT}'
+	npm install
+endif
 
 .PHONY: build
 build: ## Build the google drive sync image.
