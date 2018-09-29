@@ -20,10 +20,14 @@ RUN curl -LOk https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
       && rm -rf /node-v$NODE_VERSION-linux-x64.tar.gz \
       && npm install -g pm2
 
+COPY ./package.json /usr/local/bin/google-sync/package.json
+COPY ./package.lock.json /usr/local/bin/google-sync/package.lock.json
 COPY ./lib /usr/local/bin/google-sync/lib
 COPY ./etc /usr/local/bin/google-sync/etc
 COPY ./etc/rclone.conf /root/.config/rclone/rclone.conf.example
 
 WORKDIR /usr/local/bin/google-sync
+
+RUN  npm install --production
 
 CMD ["pm2-runtime" ,"etc/pm2.config.json"]
