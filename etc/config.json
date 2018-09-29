@@ -1,7 +1,12 @@
 {
-  "googleDriveSyncFromFolder": "/",
-  "googleDriveName": "google-drive",
-  "syncToLocalFolder": "/var/target",
-  "syncOptions": "",
-  "syncInterval": 60000
+  "defaultSource": "/",
+  "defaultSyncOptions": "",
+  "syncInterval": 60000,
+  "remotes": [
+    {
+      "source": "/",
+      "name": "google-drive",
+      "destination": "/var/target"
+    }
+  ]
 }

@@ -26,18 +26,33 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
 ## Configuration options
 ```json
 {
-  "googleDriveSyncFromFolder": "/",
-  "googleDriveName": "google-drive",
-  "syncToLocalFolder": "/var/target",
-  "syncOptions": "",
-  "syncInterval": 60000
+  "defaultSource": "/",
+  "defaultSyncOptions": "",
+  "syncInterval": 60000,
+  "remotes": [
+    {
+      "source": "/test-1",
+      "name": "google-drive-1",
+      "destination": "/var/target"
+    },
+    {
+      "source": "/test-2",
+      "name": "google-drive-2",
+      "destination": "/var/target"
+    }
+  ]
 }
 ```
-- googleDriveSyncFromFolder: Default '/'. The folder within google drive to sync.
-- googleDriveName: Default google-drive. The name used in rclone.
-- syncToLocalFolder: Default /var/target. The folder where the google-drive files are synced in the container. Make sure this folder is a volume that is shared with the host.
-- syncOptions: Default none. Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
+- defaultSource: Default '/' (optional). The default folder within google drive to sync.
+- defaultSyncOptions: Default none (optional). Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
 - syncInterval: Default 60000. The amount of time in mili seconds between syncs.
+- remotes: At least one is required. Contains the configuration of the remotes in a collection.
+  - name: The configuration name of remote, must be the same as in rclone.conf.
+  - source: Default '/' (optional). The default folder within google drive to sync.
+  - destination: The folder where the google-drive files are synced in the container. Make sure this folder is a volume that is shared with the host.
+  - syncOptions: Default none (optional). Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
+
+It is possible to add multiple remotes. Make sure you also add the remote rclone configuration in the ``rclone.conf`` file with the same name as in the ``config.json``. The remotes will be synced in sequence and in order of the config.json.
 
 ```bash
 # Use -v to override the default config.json configuration.
