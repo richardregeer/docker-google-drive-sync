@@ -45,11 +45,7 @@ help:
 
 .PHONY: start
 start: ## Start docker google drive sync on development.Possible environments ENV=development|production
-ifeq ($(ENV),development)
-	${START_COMMAND} pm2-dev etc/pm2.dev.config.json
-else
 	${START_COMMAND}
-endif
 
 .PHONY: install
 install: ## Install the docker google drive sync development environment. Possible environments ENV=development

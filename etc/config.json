@@ -6,7 +6,9 @@
     {
       "source": "/",
       "name": "google-drive",
-      "destination": "/var/target"
+      "destination": "/var/target",
+      "syncOptions": "--fast-list",
+      "syncLocalToRemote": false
     }
   ]
 }

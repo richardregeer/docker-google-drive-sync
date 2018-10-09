@@ -1,17 +1,20 @@
 {
-  "defaultSource": "/test",
+  "defaultSource": "/",
   "defaultSyncOptions": "",
   "syncInterval": 60000,
   "remotes": [
     {
       "source": "/test-1",
       "name": "google-drive-1",
-      "destination": "/var/target"
+      "destination": "/var/target",
+      "syncOptions": "--fast-list"
     },
     {
       "source": "/test-2",
       "name": "google-drive-2",
-      "destination": "/var/target"
+      "destination": "/var/target",
+      "syncOptions": "--fast-list",
+      "syncLocalToRemote": true
     }
   ]
 }

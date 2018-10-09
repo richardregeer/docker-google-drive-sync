@@ -38,7 +38,8 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
     {
       "source": "/test-2",
       "name": "google-drive-2",
-      "destination": "/var/target"
+      "destination": "/var/target",
+      "syncLocalToRemote": true
     }
   ]
 }
@@ -51,6 +52,7 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
   - source: Default '/' (optional). The default folder within google drive to sync.
   - destination: The folder where the google-drive files are synced in the container. Make sure this folder is a volume that is shared with the host.
   - syncOptions: Default none (optional). Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
+  - syncLocalToRemote: Default false. Reverse the sync from remote drive to local, so your local sync folder is leading. This options can be useful if you want to use the webdrive as backup.
 
 It is possible to add multiple remotes. Make sure you also add the remote rclone configuration in the ``rclone.conf`` file with the same name as in the ``config.json``. The remotes will be synced in sequence and in order of the config.json.
 
