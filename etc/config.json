@@ -2,6 +2,7 @@
   "defaultSource": "/",
   "defaultSyncOptions": "",
   "syncInterval": 60000,
+  "runOnce": false,
   "remotes": [
     {
       "source": "/",

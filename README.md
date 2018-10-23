@@ -47,6 +47,7 @@ bash -c 'rclone config && echo -e "\n\n****[ Config file]****" && cat /root/.con
 - defaultSource: Default '/' (optional). The default folder within google drive to sync.
 - defaultSyncOptions: Default none (optional). Add additional rclone arguments, for more info about rclone configuration see the [rclone](https://rclone.org/drive/) documentation.
 - syncInterval: Default 60000. The amount of time in mili seconds between syncs.
+- runOnce: Default false. When set to true the sync will run only one time and then exit.
 - remotes: At least one is required. Contains the configuration of the remotes in a collection.
   - name: The configuration name of remote, must be the same as in rclone.conf.
   - source: Default '/' (optional). The default folder within google drive to sync.
