@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 LABEL maintainer "Richard Regeer" \
       email="rich2309@gmail.com"
@@ -13,12 +13,11 @@ RUN apt-get update \
       && apt-get clean \
       && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /rclone-current-linux-amd64.zip
 
-ENV NODE_VERSION 8.11.3
+ENV NODE_VERSION 10.15.3
 
 RUN curl -LOk https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz \
       && tar -C /usr/local --strip-components 1 -xzf node-v$NODE_VERSION-linux-x64.tar.gz \
-      && rm -rf /node-v$NODE_VERSION-linux-x64.tar.gz \
-      && npm install -g pm2
+      && rm -rf /node-v$NODE_VERSION-linux-x64.tar.gz
 
 COPY ./package.json /usr/local/bin/google-sync/package.json
 COPY ./package-lock.json /usr/local/bin/google-sync/package-lock.json
@@ -30,4 +29,4 @@ WORKDIR /usr/local/bin/google-sync
 
 RUN  npm install --production
 
-CMD ["pm2-runtime" ,"etc/pm2.config.json"]
+CMD ["npm", "start"]

@@ -44,11 +44,14 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%s%-30s%s %s\n", "${CYAN}", $$1, "${DEFAULT}",$$2}'
 
 .PHONY: start
-start: ## Start docker google drive sync on development.Possible environments ENV=development|production
-	${START_COMMAND}
+start: ## Start docker google drive sync on development.Possible environments ENV=development
+ifneq ($(ENV),development)
+	$(error Required ENV='development')
+endif
+	${START_COMMAND} npm start
 
 .PHONY: install
-install: ## Install the docker google drive sync development environment. Possible environments ENV=development
+install: ## Install the docker google drive sync development environment. Possible environments ENV=development|ci
 ifeq ($(ENV),development)
 	@echo -e '${CYAN}Install the docker google drive sync development environment${DEFAULT}'
 	make build
